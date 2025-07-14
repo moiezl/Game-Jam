@@ -17,20 +17,22 @@ public class PlayerMovement : MonoBehaviour
     {
         input = Input.GetAxisRaw("Horizontal");
     }
-}
 
-void FixedUpdate()
+    void FixedUpdate()
 {
 float targetSpeed = input * stats.moveSpeed;
 float speedDiff = targetSpeed - rb.velocity.x;
 
-float acellrate = (Mathf.Abs(targetSpeed) > 0.01f) ? stats.acceleration : stats.deceleration
+float accelrate = (Mathf.Abs(targetSpeed) > 0.01f) ? stats.acceleration : stats.deceleration;
 
 float movement = Mathf.Pow(Mathf.Abs(speedDiff) * acellrate, 0.9f) * Mathf.Sign(speedDiff);
 
 rb.AddForce(Vector2.right * movement);
 
 }
+}
+
+
 
 
 
