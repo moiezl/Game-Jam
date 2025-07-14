@@ -25,7 +25,7 @@ float speedDiff = targetSpeed - rb.velocity.x;
 
 float accelrate = (Mathf.Abs(targetSpeed) > 0.01f) ? stats.acceleration : stats.deceleration;
 
-float movement = Mathf.Pow(Mathf.Abs(speedDiff) * acellrate, 0.9f) * Mathf.Sign(speedDiff);
+float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelrate, 0.9f) * Mathf.Sign(speedDiff);
 
 rb.AddForce(Vector2.right * movement);
 

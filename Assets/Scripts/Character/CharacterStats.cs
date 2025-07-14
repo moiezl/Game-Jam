@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterStats", menuName = "Game/Character Stats")]
 
-public class CharcterStats : ScriptableObject
+public class CharacterStats : ScriptableObject
 {
     public float moveSpeed;
     public float acceleration;

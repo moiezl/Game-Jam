@@ -31,9 +31,9 @@ private int[] selectedCharacterIndices;
     characterOptions[characterIndex].isTaken = true;
     selectedCharacterIndices[currentPlayerSelecting] = characterIndex;
 
-    curentPlayerSelecting++;
+    currentPlayerSelecting++;
 
-    if (currentPlayerSelecting >= numberOfPlayers)
+    if (currentPlayerSelecting >= numberofPlayers)
     {
         StartGame();
     }
@@ -45,7 +45,7 @@ private int[] selectedCharacterIndices;
  }
  void StartGame()
     {
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberofPlayers; i++)
         {
             int characterIndex = selectedCharacterIndices[i];
             Instantiate(characterOptions[characterIndex].characterPrefab, spawnPoints[i].position, Quaternion.identity);
