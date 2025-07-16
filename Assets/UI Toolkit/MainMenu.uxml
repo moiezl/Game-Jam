@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;" />
+    <ui:Label tabindex="-1" text="Game" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 100px;" />
+    <ui:Button text="Start" display-tooltip-when-elided="true" name="StartButton" style="text-overflow: clip; -unity-text-align: middle-center; white-space: nowrap; position: relative; font-size: 100px;" />
+    <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" style="text-overflow: clip; -unity-text-align: middle-center; white-space: nowrap; position: relative; font-size: 100px;" />
+    <ui:VisualElement style="flex-grow: 1;" />
+</ui:UXML>
