@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label tabindex="-1" text="Pick Your Characters" display-tooltip-when-elided="true" name="PlayerPromptLabel" style="font-size: 100px; -unity-text-align: upper-center;" />
+    <ui:VisualElement name="CharacterContainer" style="flex-grow: 1; flex-direction: row;" />
+</ui:UXML>

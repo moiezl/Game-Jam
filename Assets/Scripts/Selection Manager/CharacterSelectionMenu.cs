@@ -1,56 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class CharacterSelectionMenu : MonoBehaviour
 {
-public int numberofPlayers = 2;
-public CharacterOption[] characterOptions;
-public Transform[] spawnPoints;
+    private int numberOfPlayers;
+    private int currentPlayerSelecting = 0;
+    private int[] selectedCharacterIndices;
 
-private int currentPlayerSelecting = 0;
-private int[] selectedCharacterIndices;
+    public CharacterOption[] characterOptions;
 
- void Start() 
- {
-    selectedCharacterIndices = new int[numberofPlayers];
-    ShowCharacterOptions();
- }
+    private Label playerPromptLabel;
+    private VisualElement characterContainer;
 
- void ShowCharacterOptions()
- {
-      // Create buttons/icons for each character
-        // Add listeners like:
-        // button.onClick.AddListener(() => SelectCharacter(i));
- }
-
- public void SelectedCharacter(int characterIndex)
- {
-    if (characterOptions[characterIndex].isTaken) return;
-
-    characterOptions[characterIndex].isTaken = true;
-    selectedCharacterIndices[currentPlayerSelecting] = characterIndex;
-
-    currentPlayerSelecting++;
-
-    if (currentPlayerSelecting >= numberofPlayers)
+    void OnEnable()
     {
-        StartGame();
-    }
-    else
-    {
-         // Update UI to show "Player X, pick your character"
+        var root = GetComponent<UIDocument>().rootVisualElement;
+
+        playerPromptLabel = root.Q<Label>("PlayerPromptLabel");
+        characterContainer = root.Q<VisualElement>("CharacterContainer");
+
+        numberOfPlayers = GameSessionManager.Instance.numberOfPlayers;
+        selectedCharacterIndices = new int[numberOfPlayers];
+
+        ShowCharacterOptions();
+        UpdatePrompt();
     }
 
- }
- void StartGame()
+    void ShowCharacterOptions()
     {
-        for (int i = 0; i < numberofPlayers; i++)
+        characterContainer.Clear();
+
+        for (int i = 0; i < characterOptions.Length+1; i++)
         {
-            int characterIndex = selectedCharacterIndices[i];
-            Instantiate(characterOptions[characterIndex].characterPrefab, spawnPoints[i].position, Quaternion.identity);
-        }
+            int index = i;
 
-        // Optionally: Load gameplay scene if you're doing scene transition
+            var button = new Button(() => SelectCharacter(index))
+            {
+                text = characterOptions[index].characterName
+            };
+
+            if (characterOptions[index].isTaken)
+                button.SetEnabled(false);
+
+            characterContainer.Add(button);
+        }
+    }
+
+    void UpdatePrompt()
+    {
+        playerPromptLabel.text = $"Player {currentPlayerSelecting + 1}, pick your character";
+    }
+
+    void SelectCharacter(int index)
+    {
+        if (characterOptions[index].isTaken) return;
+
+        characterOptions[index].isTaken = true;
+        selectedCharacterIndices[currentPlayerSelecting] = index;
+        currentPlayerSelecting++;
+
+        if (currentPlayerSelecting >= numberOfPlayers)
+        {
+            GameSessionManager.Instance.selectedCharacterIndices = selectedCharacterIndices;
+            GameSessionManager.Instance.characterOptions = characterOptions;
+            SceneManager.LoadScene("LevelSelect");
+        }
+        else
+        {
+            ShowCharacterOptions();
+            UpdatePrompt();
+        }
     }
 }
