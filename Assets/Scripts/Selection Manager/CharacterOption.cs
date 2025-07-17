@@ -8,3 +8,4 @@ public class CharacterOption
     public Sprite icon;
     public bool isTaken = false;
 }
+

@@ -64,6 +64,7 @@ public class CharacterSelectionMenu : MonoBehaviour
         {
             GameSessionManager.Instance.selectedCharacterIndices = selectedCharacterIndices;
             GameSessionManager.Instance.characterOptions = characterOptions;
+            
             SceneManager.LoadScene("LevelSelect");
         }
         else

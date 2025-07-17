@@ -9,6 +9,7 @@ public class GameSessionManager : MonoBehaviour
     public int[] selectedCharacterIndices;
     public CharacterOption[] characterOptions;
     public List<string> selectedLevelNames = new();
+    public string currentLevel;
     public int currentLevelIndex = 0;
 
     void Awake()
