@@ -7,7 +7,14 @@ public class Platforms : MonoBehaviour
 
 
     [SerializeField]
-    private bool crumble= false;
+    private bool crumble = false;
+    [SerializeField]
+    private float crumbleTime = 1f;
+
+    [SerializeField]
+    private bool rotate = false;
+    [SerializeField]
+    private float rotationSpeed = 90f;
 
     [SerializeField]
     private bool oscilateX = false;
@@ -33,7 +40,6 @@ public class Platforms : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         startX = transform.position.x;
         startY = transform.position.y;
     }
@@ -50,6 +56,11 @@ public class Platforms : MonoBehaviour
         {
             OscilationY();
         }
+
+        if (rotate)
+        {
+            Rotate();
+        }
     }
     void OscilationX()
     {
@@ -61,19 +72,23 @@ public class Platforms : MonoBehaviour
         float yDisplacement = Mathf.Cos((Time.time * speedY) + cosOffsetY) * distanceY;
         transform.position = new Vector3(transform.position.x, startY + yDisplacement, 0);
     }
+    void Rotate()
+    {
+        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (crumble == false) 
+        if (crumble == true)
         {
-            return;
+            gameObject.SetActive(false);
+            Invoke("ResetPlatform", crumbleTime);
         }
-        gameObject.SetActive(false);
-        Invoke("ResetPlatform", 1f);
+
     }
 
-    private void ResetPlatform() 
+    private void ResetPlatform()
     {
         gameObject.SetActive(true);
     }
