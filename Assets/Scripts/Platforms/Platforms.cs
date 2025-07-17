@@ -83,7 +83,7 @@ public class Platforms : MonoBehaviour
         if (crumble == true) 
         {
             gameObject.SetActive(false);
-            Invoke("ResetPlatform", 1f); 
+            Invoke("ResetPlatform", crumbleTime); 
         }
         
     }
