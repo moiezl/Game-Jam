@@ -14,7 +14,7 @@ public class Platforms : MonoBehaviour
     [SerializeField]
     private bool rotate = false;
     [SerializeField]
-    private float rotationSpeed = 90f;
+    private float rotationSpeed = 90f; 
 
     [SerializeField]
     private bool oscilateX = false;
@@ -57,7 +57,7 @@ public class Platforms : MonoBehaviour
             OscilationY();
         }
 
-        if (rotate)
+        if(rotate) 
         {
             Rotate();
         }
@@ -78,17 +78,17 @@ public class Platforms : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {   
 
-        if (crumble == true)
+        if (crumble == true) 
         {
             gameObject.SetActive(false);
-            Invoke("ResetPlatform", crumbleTime);
+            Invoke("ResetPlatform", crumbleTime); 
         }
-
+        
     }
 
-    private void ResetPlatform()
+    private void ResetPlatform() 
     {
         gameObject.SetActive(true);
     }
