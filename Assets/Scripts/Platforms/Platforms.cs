@@ -8,6 +8,8 @@ public class Platforms : MonoBehaviour
 
     [SerializeField]
     private bool crumble = false;
+    [SerializeField]
+    private float crumbleTime = 1f;
 
     [SerializeField]
     private bool rotate = false;
