@@ -7,8 +7,10 @@ public class Bounce : MonoBehaviour
     [SerializeField]
     private float bounceForce = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
     }
+
 }

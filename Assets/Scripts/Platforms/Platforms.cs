@@ -24,40 +24,37 @@ public class Platforms : MonoBehaviour
 
     private float startX;
     private float startY;
-    private Vector3 originalPosition;
-    private Quaternion originalRotation;
-    private bool isCrumbled = false;
+    private float graphTime = 0;
+    private Quaternion startRotation;
 
     void Start()
     {
         startX = transform.position.x;
         startY = transform.position.y;
-        originalPosition = transform.position;
-        originalRotation = transform.rotation;
+        startRotation = transform.rotation;
     }
 
     void Update()
     {
-        if (isCrumbled) return;
-
+        graphTime+= Time.deltaTime;
         if (oscilateX) OscilationX();
         if (oscilateY) OscilationY();
         if (rotate) Rotate();
     }
 
-    void OscilationX()
+    private void OscilationX()
     {
-        float xDisplacement = Mathf.Sin((Time.time * speedX) + sinOffsetX) * distanceX;
+        float xDisplacement = Mathf.Sin((graphTime * speedX) + sinOffsetX) * distanceX;
         transform.position = new Vector3(startX + xDisplacement, transform.position.y, transform.position.z);
     }
 
-    void OscilationY()
+    private void OscilationY()
     {
-        float yDisplacement = Mathf.Cos((Time.time * speedY) + cosOffsetY) * distanceY;
+        float yDisplacement = Mathf.Cos((graphTime * speedY) + cosOffsetY) * distanceY;
         transform.position = new Vector3(transform.position.x, startY + yDisplacement, transform.position.z);
     }
 
-    void Rotate()
+    private void Rotate()
     {
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
     }
@@ -74,22 +71,26 @@ public class Platforms : MonoBehaviour
     {
         yield return new WaitForSeconds(crumbleDelay);
 
-        isCrumbled = true;
 
         // Disable visuals & collider
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
 
+
+        graphTime = -resetTime; // Reset graph time to start position
+        transform.rotation = startRotation; // Reset rotation
+        if (rotate) 
+        {
+            transform.Rotate(Vector3.forward, rotationSpeed *  -resetTime);
+        }
+        
         yield return new WaitForSeconds(resetTime);
 
-        // Reset position
-        transform.position = originalPosition;
-        transform.rotation = originalRotation;
 
         // Re-enable visuals & collider
         GetComponent<Collider2D>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
 
-        isCrumbled = false;
+
     }
 }
