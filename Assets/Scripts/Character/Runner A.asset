@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc61790b44fb9c742b8f5351be0b9f67, type: 3}
   m_Name: Runner A
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  acceleration: 0
-  deceleration: 0
+  moveSpeed: 10
+  acceleration: 4
+  deceleration: 4
