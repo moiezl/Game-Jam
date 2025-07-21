@@ -8,9 +8,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float input;
 
-    void Awake()
-    {
+  void Awake()
+  {
+    stats = Instantiate(stats);
     rb = GetComponent<Rigidbody2D>();
+
+    
     }
   // Update is called once per frame
     void Update()
